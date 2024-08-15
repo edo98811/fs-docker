@@ -60,6 +60,10 @@ def safe_eval(s: str) -> str:
     except (SyntaxError, ValueError):
         return s
  
+ 
+"""
+This class is used to create the table, and contains it during the foftware execution.
+"""
 class Table():
   def __init__(self, SET, find_type): 
     self.find_type = find_type
@@ -91,7 +95,6 @@ class Table():
     self.add_processing_info(os.path.join(self.SET["reconall"]), os.path.join(self.SET["samseg"]), os.path.join(self.SET["nifti"]))
 
 
-# to delete the return value
   def create_table_df(self, base_directory: str):
 
       remove_spaces_in_folders(base_directory)
@@ -102,6 +105,7 @@ class Table():
         "mris": [],
         "paths": []
       }
+      
       # TODO: write only one function foir dicom and nifti with conditions in critical parts
       if self.find_type == "dicom":
         # Iterate through all the directories in base_directory

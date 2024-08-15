@@ -30,14 +30,16 @@ def _remove_spaces(data_path: str) -> None:
           
       os.chdir(original_directory)
       
-# Data preparation 
+"""
+This class is used to prepare the data for processing 
+"""
 class Prepare():
   def __init__(self, SET, table):
     self.df = table.table
     self.SET = SET
 
   """
-  This function is the most complex, it either prepares to convert some images or directly copies them if they are nicti
+  This class is the most complex, it either prepares to convert some images or directly copies them if they are nicti
   it selects them iterating through the columns requested, then either taking the last image listed or selectign the biggest
   the takes the path from "paths" 
   it then adds it to the origin and destinations text files it if not yet converted (or copies) it to the nifti folder

@@ -4,14 +4,18 @@ from fs_docker_manager import helper_functions as h
 import math
 import os
 
+"""
+This class is used to start the containers, passing to them all the necessary information
+"""
 class DockerInstance():
-    def __init__(self, SET, source, destination):
+    def __init__(self, SET, source, destination, test_mode = False):
         self.source = source
+        self.test_mode = test_mode
         self.destination = destination
         self.SET = SET
     
     def _command_function(self, max_number: int) -> list[str]:
-        return [ # " ".join(
+        return [ 
                 "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
                 "-v", f"{self.SET["license_path"]}:/license.txt:ro",
                 "-v", f"{self.SET["app_path"]}/freesurfer_all.sh:/root/freesurfer.sh",

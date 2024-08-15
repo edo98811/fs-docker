@@ -20,7 +20,8 @@ def tool(ctx: click.Context):
     
 @tool.command()
 @click.option('--start_type', type=str, default = "dicom")
-def table(ctx: click.Context, start_type: str):
+@click.option('--test_mode', type=bool, default = False)
+def table(test_mode, ctx: click.Context, start_type: str):
     """Create a table."""
     
     fs = FreesurferTool(ctx.obj["config"], start_type=start_type)
@@ -29,7 +30,8 @@ def table(ctx: click.Context, start_type: str):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default = (120, 20))
-def convertdicom(ctx: click.Context, nsub: tuple):
+@click.option('--test_mode', type=bool, default = False)
+def convertdicom(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Convert DICOM files."""
 
@@ -39,7 +41,8 @@ def convertdicom(ctx: click.Context, nsub: tuple):
 
 
 @tool.command()
-def preparenifti(ctx: click.Context):
+@click.option('--test_mode', type=bool, default = False)
+def preparenifti(test_mode, ctx: click.Context):
     """
     Prepare nifti files. if the rawdata are already nifti
     If the rawdata directory coincides with the nifti data, the image names and paths are saved. Otherwise they are moved to the nifti directory
@@ -52,7 +55,8 @@ def preparenifti(ctx: click.Context):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
-def run_recon_all(ctx: click.Context, nsub: tuple):
+@click.option('--test_mode', type=bool, default = False)
+def run_recon_all(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Run recon-all."""
     
@@ -63,7 +67,8 @@ def run_recon_all(ctx: click.Context, nsub: tuple):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
-def run_samseg(ctx: click.Context, nsub: tuple):
+@click.option('--test_mode', type=bool, default = False)
+def run_samseg(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Run SAMSEG."""
     
@@ -73,7 +78,8 @@ def run_samseg(ctx: click.Context, nsub: tuple):
 
 
 @tool.command()
-def registration(ctx: click.Context):
+@click.option('--test_mode', type=bool, default = False)
+def registration(test_mode, ctx: click.Context):
     """Run registration."""
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="nifti")
     fs.Prepare.prepare_for_registration()
@@ -81,7 +87,8 @@ def registration(ctx: click.Context):
     
 @base.command()
 @click.argument('destination', type=click.Path())
-def init_config(destination):
+@click.option('--test_mode', type=bool, default = False)
+def init_config(test_mode, destination):
     """Initialize a new configuration file in the provided path."""
     load_settings.create_config(destination)
     
