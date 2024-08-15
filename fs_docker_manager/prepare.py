@@ -2,7 +2,7 @@ from typing import List
 import os
 import shutil
 import pandas as pd
-import helper_functions as h
+from fs_docker_manager import helper_functions as h
 
 
 # Helper functions 

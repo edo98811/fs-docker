@@ -25,14 +25,16 @@ Arguments: string, path to config file, including the name of the file, the name
 
 - **`fs_docker tool register`**  Register the t2 to the t1 to run the samseg
 
-- **`fs_docker tool convert`**  Convert to nifti
+- **`fs_docker tool preparenifti`**  move the nifti files to another folder if the nifti folder is different from dicom folder in settings
+
+- **`fs_docker tool convertdicom`**  convert the dicom files to nifti
 
 - **`fs_docker tool samseg`** run samseg, after performing the registration 
 
-- **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use . 
- This creates a table that contains all the info on the subjects ordered in these columns: 
- ID, mris, paths. 
- Then all of these data are completed 
+- **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use -start_type nifti
+This creates a table that contains all the info on the subjects ordered in these columns: 
+ID, mris, paths. 
+
 
 - **`fs_docker tool fstables`** 
 
@@ -45,9 +47,9 @@ fs_docker init_config
 set in settings the parameters and the substrings to to check for matching
 
 ```
-fs_docker tool prepare dicom on the raw folder (can also be external or tmp)
+fs_docker tool convertdicom
 create the table
-fs_docker tool convert nifti 
+fs_docker tool preparenifti
 ```
 Then
 ```

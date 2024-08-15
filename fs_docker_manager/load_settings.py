@@ -3,7 +3,6 @@ from pathlib import Path
 import click
 import shutil
 
-
 DEFAULT_CONFIG_FILE = Path(__file__).parent / 'settings.json'
 LOCATION_FILE = Path(__file__).parent / 'location.json'
 

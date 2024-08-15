@@ -1,6 +1,6 @@
 import os
 import shutil
-import helper_functions as h
+from fs_docker_manager import helper_functions as h
 
 # function to edit to define how the dicom names are created, input are the destination root, the root and the dir of the dicom folder
 def _define_directories(root, dir, destination_dir):

@@ -1,8 +1,8 @@
 
-import create_table as t
-import prepare as p
-import docker as d
-import helper_functions as h
+from fs_docker_manager import create_table as t
+from fs_docker_manager import prepare as p
+from fs_docker_manager import docker as d
+from fs_docker_manager import helper_functions as h
 
 
 class FreesurferTool():

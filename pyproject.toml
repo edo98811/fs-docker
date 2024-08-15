@@ -4,16 +4,21 @@ version = "0.1.0"
 description = ""
 authors = ["edo98811 <edoardofilippi1998@gmail.com>"]
 readme = "README.md"
+include = [
+    {path = "files/settings.json"},
+    {path = "files/location.json"},
+    {path = "fs_docker_manager/freesurfer_all.sh"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 argparse = "^1.4.0"
 click = "^8.1.7"
-
+pandas = "^2.2.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-celescope-helper = "fs_docker.__main__:main"
+fs-docker = "fs_docker_manager.__main__:base"
