@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fs-docker-manager"
+version = "0.1.0"
+description = ""
+authors = ["edo98811 <edoardofilippi1998@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+argparse = "^1.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+celescope-helper = "fs_docker_manager.__main__:main"

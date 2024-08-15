@@ -1,0 +1,44 @@
+{
+    "nifti": "/mnt/S/edoardoStorage/MRI_dbsclin/nifti/",
+    "rawdata": "/mnt/S/edoardoStorage/MRI_dbsclin/Data/",
+    "base_path": "/mnt/S/edoardoStorage/MRI_dbsclin/", 
+    "reconall": "/mnt/S/edoardoStorage/MRI_dbsclin/reconall_results",
+    "samseg": "/mnt/S/edoardoStorage/MRI_dbsclin/samseg_result_lesions",
+    "license_path": "/mnt/S/edoardoStorage/MRI1/license.txt",
+    "table_path": "/mnt/S/edoardoStorage/MRI_dbsclin/",
+    "table_name": "MRI_table.xlsx",
+    "app_path": "/mnt/S/edoardoStorage/Freesurfer_tool/",
+    "file_identifiers": {
+        "T1": [
+            "t1"
+        ],
+        "T1_pref_not": [
+            "KM"
+        ],
+        "T2": [
+            "t2"
+        ],
+        "t1FLAIR": [
+            "t2fl",
+            "fl"
+        ],
+        "t2FLAIR": [
+            "t1fl",
+            "fl"
+        ],
+        "T1_no": [
+            "T2",
+            "t2",
+            "FLAIR"
+        ],
+        "T2_no": [
+            "fl"
+        ],
+        "t1FLAIR_no": [
+            "t2"
+        ],
+        "t2FLAIR_no": [
+            "t1"
+        ]
+    }
+}

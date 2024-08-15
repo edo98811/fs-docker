@@ -1,0 +1,4 @@
+install twine to create packae (and setup tools??)
+rewrite main with options
+reread how to create a package and this time document it 
+see if  we can make the deployment and how does it work
