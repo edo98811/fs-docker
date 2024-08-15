@@ -2,8 +2,15 @@
 Tool to simplify the automation of freesurfer using docker on a server
 ### Introduction
 
-### Installation 
 
+### Installation 
+```
+git clone https://github.com/edo98811/fs-docker.git
+cd fs-docker-manager
+pip install (-e) .
+
+```
+e for developement installation 
 
 ### Preparation 
 This can work on any folder, what needs to be written ever time is a funtion to find the subject name in the directory tree every time an mri is found. it can be a directory level, a part of the directory name, anthing. The mri that have the same subject name are put togehter and are considered as from the same subject. 
@@ -11,30 +18,52 @@ This can work on any folder, what needs to be written ever time is a funtion to 
 
 ### Commands 
 
- - table (tablenifti)
- To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use the command tablenifti. 
+ - **`fs_docker init_config`** Requires one argument, path to the new config file that needs to be created, it needs to be a .json file
+Arguments: string, path to config file, including the name of the file, the name needs to be ajson file. example: "/mnt/S/edoardoStorage/config.json"
+
+- **`fs_docker tool fstables`** create the tables using the freesurfer command 
+
+- **`fs_docker tool register`**  Register the t2 to the t1 to run the samseg
+
+- **`fs_docker tool convert`**  Convert to nifti
+
+- **`fs_docker tool samseg`** run samseg, after performing the registration 
+
+- **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use . 
  This creates a table that contains all the info on the subjects ordered in these columns: 
  ID, mris, paths. 
  Then all of these data are completed 
- - samseg
- - convert
- - register
- - fstables
 
+- **`fs_docker tool fstables`** 
 
 #### Workflow example: 
-    install softweare runnning install.sh
-    set in settings the parameters and the substrings to to check for matching
-    run prepare dicom on the raw folder (can also be external or tmp)
-    create the table
-    run convert nifti 
-    run reconall 
-        or 
-    run registration 
-    run samseg
+install package 
+
+```
+fs_docker init_config
+```
+set in settings the parameters and the substrings to to check for matching
+
+```
+fs_docker tool prepare dicom on the raw folder (can also be external or tmp)
+create the table
+fs_docker tool convert nifti 
+```
+Then
+```
+fs_docker tool reconall 
+```
+or 
+```
+fs_docker tool registration 
+fs_docker tool samseg
+```
+
+
+
 
 ### Configuration File Description
-What is it?
+This file is used for set up the program for the current dataset
 
 #### Paths
 
