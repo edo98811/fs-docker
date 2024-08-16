@@ -33,7 +33,7 @@ def table(ctx: click.Context, test_mode, start_type: str):
 @click.option('--nsub', nargs=2, type=float, default = (120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def convertdicom(test_mode, ctx: click.Context, nsub: tuple):
+def convertdicom(ctx: click.Context, test_mode, nsub: tuple):
     N1, N2 = nsub
     """Convert DICOM files."""
 
@@ -45,7 +45,7 @@ def convertdicom(test_mode, ctx: click.Context, nsub: tuple):
 @tool.command()
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def preparenifti(test_mode, ctx: click.Context):
+def preparenifti(ctx: click.Context, test_mode):
     """
     Prepare nifti files. if the rawdata are already nifti
     If the rawdata directory coincides with the nifti data, the image names and paths are saved. Otherwise they are moved to the nifti directory
@@ -60,7 +60,7 @@ def preparenifti(test_mode, ctx: click.Context):
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def run_recon_all(test_mode, ctx: click.Context, nsub: tuple):
+def run_recon_all(ctx: click.Context, test_mode, nsub: tuple):
     N1, N2 = nsub
     """Run recon-all."""
     
@@ -73,7 +73,7 @@ def run_recon_all(test_mode, ctx: click.Context, nsub: tuple):
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def run_samseg(test_mode, ctx: click.Context, nsub: tuple):
+def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
     N1, N2 = nsub
     """Run SAMSEG."""
     
@@ -85,7 +85,7 @@ def run_samseg(test_mode, ctx: click.Context, nsub: tuple):
 @tool.command()
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def registration(test_mode, ctx: click.Context):
+def registration(ctx: click.Context, test_mode):
     """Run registration."""
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="nifti")
     fs.Prepare.prepare_for_registration()
@@ -93,9 +93,8 @@ def registration(test_mode, ctx: click.Context):
     
 @base.command()
 @click.argument('destination', type=click.Path())
-@click.option('--test_mode', type=bool, default = False)
-def init_config(test_mode, destination):
-    """Initialize a new configuration file in the provided path."""
+def init_config(destination):    
+    """Initialize  test_mode,a new configuration file in the provided path."""
     load_settings.create_config(destination)
     
     

@@ -3,6 +3,7 @@ import os
 import shutil
 import pandas as pd
 from fs_docker_manager import helper_functions as h
+from pathlib import Path
 
 
 # Helper functions 
@@ -51,7 +52,7 @@ class Prepare():
     source_docker_destination_path = []
 
     os.makedirs(os.path.join(self.SET["nifti"]), exist_ok=True)
-    f = open(f"{self.SET['nifti']}log.txt", "w")
+    f = open(Path(self.SET['nifti']) / "log.txt", "w")
 
     for _, row in self.df.iterrows():
 

@@ -9,6 +9,7 @@ include = [
     {path = "files/location.json"},
     {path = "fs_docker_manager/freesurfer_all.sh"}
 ]
+exclude = ["fs_docker_manager.tests*"] 
 
 [tool.poetry.dependencies]
 python = "^3.12"

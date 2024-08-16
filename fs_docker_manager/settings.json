@@ -7,6 +7,7 @@
     "license_path": "/mnt/S/edoardoStorage/MRI1/license.txt",
     "table_path": "/mnt/S/edoardoStorage/MRI_dbsclin/",
     "table_name": "MRI_table.xlsx",
+    "container_id": "1b0f81a8cb9f",
     "app_path": "/mnt/S/edoardoStorage/Freesurfer_tool/",
     "file_identifiers": {
         "T1": [

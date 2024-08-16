@@ -24,7 +24,7 @@ class DockerInstance():
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
-                "1b0f81a8cb9f",
+                self.SET["container_id"],
                 "sh", "freesurfer.sh"
             ]
         
@@ -74,7 +74,7 @@ class DockerInstance():
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
-                "1b0f81a8cb9f",
+                self.SET["container_id"],
                 "sh", "freesurfer.sh", function, str(start), str(end)
             ]
             # command = _command_function(max_number) + [function, str(start), str(end)]
@@ -126,7 +126,7 @@ class DockerInstance():
             "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
             "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
             "-e", "FS_LICENSE=license.txt",
-            "1b0f81a8cb9f",
+            self.SET["container_id"],
             "sh", "freesurfer.sh", function
         ]
         # command = _command_function(max_number) + [function]
