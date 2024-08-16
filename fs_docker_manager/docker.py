@@ -3,6 +3,7 @@ from datetime import datetime
 from fs_docker_manager import helper_functions as h
 import math
 import os
+from pathlib import Path
 
 """
 This class is used to start the containers, passing to them all the necessary information
@@ -18,8 +19,8 @@ class DockerInstance():
         return [ 
                 "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
                 "-v", f"{self.SET["license_path"]}:/license.txt:ro",
-                "-v", f"{self.SET["app_path"]}/freesurfer_all.sh:/root/freesurfer.sh",
-                "-v", f"{self.SET["app_path"]}/tmp:/info:ro",
+                "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
+                "-v", f"{Path(__file__).parent}/tmp:/info:ro",
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
@@ -68,8 +69,8 @@ class DockerInstance():
             command = [ # " ".join(
                 "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
                 "-v", f"{self.SET["license_path"]}:/license.txt:ro",
-                "-v", f"{self.SET["app_path"]}/freesurfer_all.sh:/root/freesurfer.sh",
-                "-v", f"{self.SET["app_path"]}/tmp:/info:ro",
+                "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
+                "-v", f"{Path(__file__).parent}/tmp:/info:ro",
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
@@ -120,8 +121,8 @@ class DockerInstance():
         command = [ # " ".join(
             "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
             "-v", f"{self.SET["license_path"]}:/license.txt:ro",
-            "-v", f"{self.SET["app_path"]}/freesurfer_all.sh:/root/freesurfer.sh",
-            "-v", f"{self.SET["app_path"]}/tmp:/info:ro",
+            "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
+            "-v", f"{Path(__file__).parent}/tmp:/info:ro",
             "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
             "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
             "-e", "FS_LICENSE=license.txt",

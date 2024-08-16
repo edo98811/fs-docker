@@ -21,16 +21,18 @@ def tool(ctx: click.Context):
 @tool.command()
 @click.option('--start_type', type=str, default = "dicom")
 @click.option('--test_mode', type=bool, default = False)
-def table(test_mode, ctx: click.Context, start_type: str):
+@click.pass_context
+def table(ctx: click.Context, test_mode, start_type: str):
     """Create a table."""
     
-    fs = FreesurferTool(ctx.obj["config"], start_type=start_type)
+    fs = FreesurferTool(ctx.obj["config"], start_type=start_type, new = True)
     fs.Table.save_table()
 
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default = (120, 20))
 @click.option('--test_mode', type=bool, default = False)
+@click.pass_context
 def convertdicom(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Convert DICOM files."""
@@ -42,6 +44,7 @@ def convertdicom(test_mode, ctx: click.Context, nsub: tuple):
 
 @tool.command()
 @click.option('--test_mode', type=bool, default = False)
+@click.pass_context
 def preparenifti(test_mode, ctx: click.Context):
     """
     Prepare nifti files. if the rawdata are already nifti
@@ -56,6 +59,7 @@ def preparenifti(test_mode, ctx: click.Context):
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
+@click.pass_context
 def run_recon_all(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Run recon-all."""
@@ -68,6 +72,7 @@ def run_recon_all(test_mode, ctx: click.Context, nsub: tuple):
 @tool.command()
 @click.option('--nsub', nargs=2, type=float, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
+@click.pass_context
 def run_samseg(test_mode, ctx: click.Context, nsub: tuple):
     N1, N2 = nsub
     """Run SAMSEG."""
@@ -79,6 +84,7 @@ def run_samseg(test_mode, ctx: click.Context, nsub: tuple):
 
 @tool.command()
 @click.option('--test_mode', type=bool, default = False)
+@click.pass_context
 def registration(test_mode, ctx: click.Context):
     """Run registration."""
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="nifti")

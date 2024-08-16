@@ -7,7 +7,7 @@ import re
 # Funtion to modify each time, it returns the aquisition name
 def acquisition_name(folder_path, image_name, base_directory = ""):
 
-
+  return folder_path.split("/")[-1]
   # if it is not nifti or it is a CT scan
   if "CCT " in image_name or not image_name.endswith(".nii"):
     return None
@@ -65,10 +65,10 @@ def safe_eval(s: str) -> str:
 This class is used to create the table, and contains it during the foftware execution.
 """
 class Table():
-  def __init__(self, SET, find_type): 
+  def __init__(self, SET, find_type, new): 
     self.find_type = find_type
     self.SET = SET
-    if not os.path.isfile(os.path.join(self.SET["table_path"], self.SET["table_name"])):
+    if not os.path.isfile(os.path.join(self.SET["table_path"], self.SET["table_name"])) or new:
       print(f"Creating Table in location: {os.path.join(self.SET['table_path'], self.SET['table_name'])}")
       self.create_mris_table() # posso rendere questo processo migliore? (ad es, la load se esiste, la crea se esiste), magari salvarla e un processo diverso
     else:

@@ -1,5 +1,6 @@
 todo.txt 
 fs_docker_manager/__main__old.py
+test_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
