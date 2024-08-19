@@ -7,7 +7,7 @@ import sys
 import unittest
 
 sys.path.append("../") 
-import docker
+import fs_docker_manager.docker as docker
 # Assuming Table class is defined in a module named table_module
 # from table_module import Table
 

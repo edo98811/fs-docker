@@ -312,7 +312,7 @@ class Table():
         self.table = self.table.drop(rowname, axis=0)
 
   def add_processing_info(self, search_path_reconall: str, search_path_samseg: str, search_path_data: str) -> None:
-
+    # questo posso refactor
 
     # Checks if samseg was run
     for index, row in self.table.iterrows():

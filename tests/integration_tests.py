@@ -6,7 +6,7 @@ import sys
 import unittest
 
 sys.path.append("../") 
-import freesurfer_tool
+import fs_docker_manager.freesurfer_tool as freesurfer_tool
 
 class TestTable(unittest.TestCase):
     

@@ -1,11 +1,14 @@
 import pandas as pd
-
+import sys
 # Creating the DataFrame
 
 import unittest
 
 # Assuming Table class is defined in a module named table_module
 # from table_module import Table
+
+sys.path.append("../") 
+import fs_docker_manager.prepare as prepare
 
 class TestTable(unittest.TestCase):
     @classmethod
