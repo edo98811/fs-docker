@@ -72,7 +72,6 @@ This file is used for set up the program for the current dataset
 - **nifti**: The path to the directory containing NIfTI files.
 - **base_path**: The base directory path for various tools and outputs.
 - **dicom**: The path to the directory containing DICOM files.
-- **app_path**: The path to the application directory.
 - **reconall**: The path to the directory for recon-all results.
 - **samseg**: The path to the directory for SAMSEG results.
 - **license_path**: The path to the license file.

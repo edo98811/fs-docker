@@ -158,14 +158,10 @@ register(){
         echo "vol2vol OK"
         echo "done subject: $count - $folder"
       else  
-        echo "running coreg..."  
         echo "mri_coreg --mov $t2_flair --ref $t1 --reg $folder/$registration_nam "  > $SUBJECTS_DIR/$folder/$registration_name.txt
-        echo "coreg OK - running vol2vol..."
         echo "mri_vol2vol --mov  $t2_flair  --reg $folder/$registration_name  --o $folder/$registered_flair_name --targ $t1 " > $SUBJECTS_DIR/$folder/$registered_flair_name.txt
-        echo "vol2vol OK"
         echo "done subject: $count - $folder"
       fi
-
     fi
   
     if [ $count -ge $end ]; then
@@ -230,6 +226,11 @@ if [ $# -eq 1 ]; then
 elif [ $# -eq 3 ]; then
   start=$2
   end=$3
+  $1
+elif [ $# -eq 4 ]; then
+  start=$2
+  end=$3
+  test=$4
   $1
 else
     echo "Invalid number of arguments: $#. Please provide either 1 or 3 arguments."

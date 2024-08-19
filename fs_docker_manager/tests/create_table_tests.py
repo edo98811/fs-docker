@@ -7,7 +7,7 @@ import sys
 import unittest
 
 sys.path.append("../") 
-import prepare
+import create_table
 # Assuming Table class is defined in a module named table_module
 # from table_module import Table
 
@@ -17,7 +17,7 @@ class TestTable(unittest.TestCase):
     def setUpClass(cls):
         table = testing_utils.settings()
         settings = testing_utils.patient_table()
-        cls.prepare_class = prepare.Prepare(settings, table)
+        cls.prepare_class = create_table.Table()
 
     @classmethod
     def test_prepare_for_conversion(self):

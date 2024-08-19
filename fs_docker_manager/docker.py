@@ -77,6 +77,7 @@ class DockerInstance():
                 self.SET["container_id"],
                 "sh", "freesurfer.sh", function, str(start), str(end)
             ]
+            if self.test_mode: command.append(True)
             # command = _command_function(max_number) + [function, str(start), str(end)]
 
             with open(f"{logf}/edoardo_freesurfer_{max_number}.txt", "w") as f:
@@ -129,6 +130,7 @@ class DockerInstance():
             self.SET["container_id"],
             "sh", "freesurfer.sh", function
         ]
+        if self.test_mode: command.append(True)
         # command = _command_function(max_number) + [function]
 
         # with open(f"{logf}/edoardo_freesurfer_{max_number}.txt", "w") as f:
