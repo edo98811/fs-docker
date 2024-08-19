@@ -13,7 +13,7 @@ pip install (-e) .
 e for developement installation 
 
 ### Preparation 
-This can work on any folder, what needs to be written ever time is a funtion to find the subject name in the directory tree every time an mri is found. it can be a directory level, a part of the directory name, anthing. The mri that have the same subject name are put togehter and are considered as from the same subject. 
+The folder where this is run needs to hafve a regular structure, acquisition folder and files inside. the files canbe nifti or dicom, name of the acquisition folder is the one used in the table
 
 
 ### Commands 
