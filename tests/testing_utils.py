@@ -4,7 +4,7 @@ import pandas as pd
 def test_files(file1, file2): 
     if len(file1) != len(file2): return False
     
-    for i in range(len(file1)): # use smaller length
+    for i in range(len(file1)): 
         if (file2[i] != file1[i]): return False
     
     return True
@@ -86,3 +86,7 @@ def patient_table():
     }
         
     return pd.DataFrame(data)
+
+def check_table(table, table_to_test):
+    
+    return True

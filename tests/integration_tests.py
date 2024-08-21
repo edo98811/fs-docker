@@ -8,10 +8,11 @@ import unittest
 sys.path.append("../") 
 import fs_docker_manager.freesurfer_tool as freesurfer_tool
 
-class TestTable(unittest.TestCase):
+class TestTool(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
         table = testing_utils.settings()
         settings = testing_utils.patient_table()
-        cls.docker_class = freesurfer_tool.FreesurferTool()
+        cls.freesurfer_class = freesurfer_tool.FreesurferTool()
+        

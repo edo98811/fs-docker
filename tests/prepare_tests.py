@@ -1,73 +1,115 @@
 import pandas as pd
+import testing_utils
+
 import sys
 # Creating the DataFrame
 
 import unittest
 
+sys.path.append("../") 
+import fs_docker_manager.prepare as prepare
 # Assuming Table class is defined in a module named table_module
 # from table_module import Table
 
-sys.path.append("../") 
-import fs_docker_manager.prepare as prepare
-
-class TestTable(unittest.TestCase):
+class TestPrepare(unittest.TestCase):
+    
     @classmethod
     def setUpClass(cls):
-        # Set up any class-wide resources, e.g., creating a DataFrame that will be reused in all tests
-        data = {
-            'acquisition': ['2022-01-01', '2022-01-02', '2022-01-03', '2022-01-04'],
-            'mris': ['T1', 'T2', 'T1', 'T2'],
-            'paths': [
-                ['path1', 'path2'],
-                ['path3', 'path4'],
-                ['path5', 'path6'],
-                ['path7', 'path8']
-            ],
-            'converted': [
-                [True, False],
-                [True, True],
-                [False, False],
-                [True, False]
-            ]
-        }
-        cls.df = pd.DataFrame(data)
-        # cls.table = Table(cls.df)  # Instantiate the Table class with the test DataFrame
+        settings = testing_utils.settings()
+        table = testing_utils.patient_table()
+        cls.prepare_class = prepare.Prepare(table, settings)
 
-    def setUp(self):
-        # Set up resources needed for each individual test
-        pass
+    @classmethod
+    def test_prepare_for_conversion(self):
+        origins, _ = self.prepare_class.prepare_for_conversion(testing=True)
+        message = "test_prepare_for_conversion for origin file not correct"
 
-    def tearDown(self):
-        # Clean up after each test if necessary
-        pass
-
-    def test_initialization(self):
-        # Test initialization of the Table class
-        # self.assertIsInstance(self.table, Table)
-        pass
-
-    def test_some_method(self):
-        # Example test for a method in the Table class
-        # result = self.table.some_method()
-        # self.assertEqual(result, expected_value)
-        pass
-
-    def test_another_method(self):
-        # Example test for another method in the Table class
-        # result = self.table.another_method()
-        # self.assertTrue(result)
-        pass
-
-    def test_edge_case(self):
-        # Example test for an edge case
-        # with self.assertRaises(SomeException):
-        #     self.table.method_that_raises()
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
         pass
 
     @classmethod
-    def tearDownClass(cls):
-        # Clean up any class-wide resources if necessary
+    def test_prepare_for_reconall(self):
+        origins, _ = self.prepare_class.prepare_for_reconall(testing=True)
+        message = "test_prepare_for_reconall for origin file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_samseg(self):
+        origins, _ = self.prepare_class.prepare_for_samseg(testing=True)
+        message = "test_prepare_for_samseg for origin file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_registration(self):
+        origins, _ = self.prepare_class.prepare_for_registration(testing=True)
+        message = "test_prepare_for_registration for origin file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_tables(self):
+        origins, _ = self.prepare_class.prepare_for_tables(testing=True)
+        message = "test_prepare_for_tables for origin file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
+        pass
+    
+    @classmethod
+    def test_prepare_for_conversion(self):
+        _, destinations = self.prepare_class.prepare_for_conversion(testing=True)
+        message = "test_prepare_for_conversion for destinations file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_reconall(self):
+        _, destinations = self.prepare_class.prepare_for_reconall(testing=True)
+        message = "test_prepare_for_reconall for destinations file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_samseg(self):
+        _, destinations = self.prepare_class.prepare_for_samseg(testing=True)
+        message = "test_prepare_for_samseg for destinations file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_registration(self):
+        _, destinations = self.prepare_class.prepare_for_registration(testing=True)
+        message = "test_prepare_for_registration for destinations file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
+        pass
+
+    @classmethod
+    def test_prepare_for_tables(self):
+        _, destinations = self.prepare_class.prepare_for_tables(testing=True)
+        message = "test_prepare_for_tables for destinations file not correct"
+
+        expected_file = [""]
+        self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
         pass
 
 if __name__ == '__main__':
     unittest.main()
+    
+

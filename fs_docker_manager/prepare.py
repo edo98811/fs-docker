@@ -46,7 +46,7 @@ class Prepare():
   it then adds it to the origin and destinations text files it if not yet converted (or copies) it to the nifti folder
   """
   
-  def prepare_for_conversion(self, cols=["t1", "t2", "t2_flair", "t1_flair"], last=True, move=False)-> None:
+  def prepare_for_conversion(self, cols=["t1", "t2", "t2_flair", "t1_flair"], last=True, move=False, testing=False)-> None:
     
     source_docker_origin_path = []
     source_docker_destination_path = []
@@ -121,10 +121,15 @@ class Prepare():
                     raise Exception("trying to convert dicom but file found, maybe you wanted to use 'preparnifti'")
       f.write("\n")
     f.close()
+    
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path) 
 
-    _save_files(source_docker_origin_path, source_docker_destination_path) 
+    
 
-  def prepare_for_reconall_from_source_deprecated(self, cols=["t1"], last=True)-> None: 
+  def prepare_for_reconall_from_source_deprecated(self, cols=["t1"], last=True, testing = False)-> None: 
     
     source_docker_origin_path = []
     source_docker_destination_path = []
@@ -170,9 +175,12 @@ class Prepare():
                   source_docker_origin_path.append(f"/ext/fs-subjects/{last_path}")
                   source_docker_destination_path.append(f"/ext/processed-subjects/{row['acquisition']}/{last_element}.nii")
 
-    _save_files(source_docker_origin_path, source_docker_destination_path) 
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path)
 
-  def prepare_for_reconall(self)-> None:
+  def prepare_for_reconall(self, testing = False)-> None:
     
     source_docker_origin_path = []
     source_docker_destination_path = []
@@ -193,9 +201,12 @@ class Prepare():
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
-    _save_files(source_docker_origin_path, source_docker_destination_path) 
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path)
         
-  def prepare_for_samseg(self)-> None:
+  def prepare_for_samseg(self, testing = False)-> None:
     
     source_docker_origin_path = []
     source_docker_destination_path = []
@@ -214,9 +225,12 @@ class Prepare():
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/flair_t2_reg.nii")
         source_docker_destination_path.append(f"{row['acquisition']}") # /ext/processed-subjects/
     
-    _save_files(source_docker_origin_path, source_docker_destination_path) 
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path)
 
-  def prepare_for_registration(self)-> None:
+  def prepare_for_registration(self, testing = False)-> None:
     
     source_docker_origin_path = []
     source_docker_destination_path = []
@@ -248,9 +262,12 @@ class Prepare():
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t2}.nii")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
-    _save_files(source_docker_origin_path, source_docker_destination_path) 
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path)
 
-  def prepare_for_tables(self)-> None:
+  def prepare_for_tables(self, testing = False)-> None:
 
     subjects = []
 

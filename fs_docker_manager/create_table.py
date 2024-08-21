@@ -65,26 +65,26 @@ def safe_eval(s: str) -> str:
 This class is used to create the table, and contains it during the foftware execution.
 """
 class Table():
-  def __init__(self, SET, find_type, new): 
+  def __init__(self, SET: dict, find_type: str, new: bool = False, testing_paths: list[tuple[str]] = ["",]): 
     self.find_type = find_type
     self.SET = SET
     if not os.path.isfile(os.path.join(self.SET["table_path"], self.SET["table_name"])) or new:
       print(f"Creating Table in location: {os.path.join(self.SET['table_path'], self.SET['table_name'])}")
-      self.create_mris_table() # posso rendere questo processo migliore? (ad es, la load se esiste, la crea se esiste), magari salvarla e un processo diverso
+      self.create_mris_table(testing_paths) # posso rendere questo processo migliore? (ad es, la load se esiste, la crea se esiste), magari salvarla e un processo diverso
     else:
       print(f"Updating table in location: {os.path.join(self.SET['table_path'], self.SET['table_name'])}")
       # self.table = pd.read_excel(os.path.join(self.SET["table_path"], self.SET["table_name"]))
-      self.update_mris_table()
+      self.update_mris_table(testing_paths)
 
-  def create_mris_table(self):
+  def create_mris_table(self, testing_paths) -> None:
 
-      self.table = self.create_table_df(os.path.join(self.SET["rawdata"]))
+      self.table = self.create_table_df(os.path.join(self.SET["rawdata"]), testing_paths)
 
       self.create_subj_info()
       self.add_processing_info(os.path.join(self.SET["reconall"]), os.path.join(self.SET["samseg"]), os.path.join(self.SET["nifti"]))
 
       
-  def update_mris_table(self):
+  def update_mris_table(self) -> None:
 
     self.table = pd.read_excel(os.path.join(self.SET["table_path"], self.SET["table_name"]))
 
@@ -95,7 +95,7 @@ class Table():
     self.add_processing_info(os.path.join(self.SET["reconall"]), os.path.join(self.SET["samseg"]), os.path.join(self.SET["nifti"]))
 
 
-  def create_table_df(self, base_directory: str):
+  def create_table_df(self, base_directory: str, testing_paths) -> pd.DataFrame:
 
       remove_spaces_in_folders(base_directory)
 
@@ -106,10 +106,15 @@ class Table():
         "paths": []
       }
       
+      if len(testing_paths): # ~ if testing
+        directories = testing_paths
+      else:
+        directories = os.walk(base_directory)
+        
       # TODO: write only one function foir dicom and nifti with conditions in critical parts
       if self.find_type == "dicom":
         # Iterate through all the directories in base_directory
-        for root, dirs, _ in os.walk(base_directory):
+        for root, dirs, _ in directories:
             
             # Iterate through all images (or believed to be)
             for dicom_dir in dirs:
@@ -152,7 +157,7 @@ class Table():
       elif self.find_type == "nifti":
 
         # Iterate through all the directories in base_directory
-        for root, dirs, niis in os.walk(base_directory):
+        for root, dirs, niis in directories:
             
             # Iterate through all images (or believed to be)
             for nii_file in niis:
@@ -200,7 +205,7 @@ class Table():
       
       return pd.DataFrame.from_dict(data)
 
-  def create_subj_info(self):
+  def create_subj_info(self) -> None:
     
     def _add_info(image_type: str) -> None:
       self.table[image_type] = [list() for _ in range(len(self.table.index))]
@@ -345,7 +350,7 @@ class Table():
           # print(f"NIFTI: {nifti_folder} does not exist")
           self.table.at[index, "converted"].append(False)
 
-  def save_table(self, sheet_name="subjects"):
+  def save_table(self, sheet_name="subjects") -> None:
 
       excel_filename = os.path.join(self.SET["table_path"], self.SET["table_name"])
       # Create a Pandas Excel writer using the XlsxWriter engine
