@@ -21,7 +21,7 @@ class TestTable(unittest.TestCase):
 
     def test_init(self):
 
-        self.assertEqual(self.table.table, test_table)
+        self.assertEqual(self.table.table)
 
     def test_add_subject_info(self):
 
