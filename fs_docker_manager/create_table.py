@@ -97,7 +97,7 @@ class Table():
 
   def create_table_df(self, base_directory: str, testing_paths) -> pd.DataFrame:
 
-      remove_spaces_in_folders(base_directory)
+      # remove_spaces_in_folders(base_directory)
 
 
       data = {
@@ -105,9 +105,10 @@ class Table():
         "mris": [],
         "paths": []
       }
-      
+      print(len(testing_paths))
       if len(testing_paths): # ~ if testing
         directories = testing_paths
+        print("correct")
       else:
         directories = os.walk(base_directory)
         
@@ -115,6 +116,7 @@ class Table():
       if self.find_type == "dicom":
         # Iterate through all the directories in base_directory
         for root, dirs, _ in directories:
+            print(f"{root}{dirs}")
             
             # Iterate through all images (or believed to be)
             for dicom_dir in dirs:
@@ -158,7 +160,7 @@ class Table():
 
         # Iterate through all the directories in base_directory
         for root, dirs, niis in directories:
-            
+            print(f"{root}{dirs}{niis}")
             # Iterate through all images (or believed to be)
             for nii_file in niis:
                   
