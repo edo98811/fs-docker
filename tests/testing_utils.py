@@ -55,7 +55,7 @@ def settings():
         }
     }
     
-def patient_table():
+def patient_table(short: bool = False):
     data = {
         'acquisition': ['Angeli_Vassiliki', 'Baehr_Doris', 'Bauer_Horst', 'Beck_Renate'],
         'mris': [
@@ -75,7 +75,10 @@ def patient_table():
             [False, False, False],
             [False, False, False],
             [False, False, False],
-        ],
+        ]
+    }
+    
+    if not short: data.update({
         't1': [
             ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001', '20210623_185600t1fl2dtraAngeliVassilikis007a1001'],
             ['20200602_180510t1mpragesagp2isoBaehrDoris', '20200602_180510t1fl2dtraBaehrDoris'],
@@ -112,7 +115,7 @@ def patient_table():
             ['Possible'],
             ['Possible']
         ]
-    }
+    })
         
     return pd.DataFrame(data)
 

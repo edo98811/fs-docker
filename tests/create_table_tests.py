@@ -37,20 +37,22 @@ class TestTable(unittest.TestCase):
              [], 
              ['20170831_152703t1setraBeckRenate.nii', '20170831_152703t2tsetrap2320BeckRenate.nii', '20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii']),
         ]
-        settings = testing_utils.settings()
-        self.table = create_table.Table(settings, find_type="nifti", new=True, testing_paths=self.testing_paths)
+        self.settings = testing_utils.settings()
+        self.table = create_table.Table(self.settings, find_type="nifti", new=True, testing_paths=self.testing_paths)
+        
 
     def test_init(self):
+        table_to_test = self.table.create_table_df(self.settings["nifti"], self.testing_paths)
         self.table.table.to_excel("test.xlsx")
-        table = testing_utils.patient_table()
+        table = testing_utils.patient_table(short=True)
         table.to_excel("test_test.xlsx")
-        self.assertEqual(self.table.table, table)
+        self.assertEqual(table_to_test, table)
 
     def test_add_subject_info(self):
 
         self.table.create_subj_info()
         table = testing_utils.patient_table()
-        self.assertTrue(testing_utils.check_table(self.table.table, table))
+        self.assertEqual(self.table.table, table)
 
 if __name__ == '__main__':
     unittest.main()
