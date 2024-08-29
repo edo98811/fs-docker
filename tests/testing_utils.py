@@ -55,7 +55,7 @@ def settings():
         }
     }
     
-def patient_table(short: bool = False):
+def patient_table(parts: list[bool] = [False, False]):
     data = {
         'acquisition': ['Angeli_Vassiliki', 'Baehr_Doris', 'Bauer_Horst', 'Beck_Renate'],
         'mris': [
@@ -69,16 +69,16 @@ def patient_table(short: bool = False):
             ['../../test_data/NIFTI/Baehr_Doris/20200602_180510t1mpragesagp2isoBaehrDoris.nii', '../../test_data/NIFTI/Baehr_Doris/20200602_180510t2spacesagp2isoBaehrDoris.nii', '../../test_data/NIFTI/Baehr_Doris/20200602_180510t1fl2dtraBaehrDoris.nii'],
             ['../../test_data/NIFTI/Bauer_Horst/20200915_165803t1mpragesagp2isoBauerHorst.nii', '../../test_data/NIFTI/Bauer_Horst/20200915_165803t2spacesagp2isoBauerHorst.nii', '../../test_data/NIFTI/Bauer_Horst/20200915_165803t1fl2dtraBauerHorst.nii'],
             ['../../test_data/NIFTI/Beck_Renate/20170831_152703t1setraBeckRenate.nii', '../../test_data/NIFTI/Beck_Renate/20170831_152703t2tsetrap2320BeckRenate.nii', '../../test_data/NIFTI/Beck_Renate/20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii'],
-        ],
-        'converted': [
-            [False, False, False],
-            [False, False, False],
-            [False, False, False],
-            [False, False, False],
         ]
     }
     
-    if not short: data.update({
+    if parts[0]: data.update({
+        'converted': [
+            [], # added in add processing info 
+            [],
+            [],
+            [],
+        ],
         't1': [
             ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001', '20210623_185600t1fl2dtraAngeliVassilikis007a1001'],
             ['20200602_180510t1mpragesagp2isoBaehrDoris', '20200602_180510t1fl2dtraBaehrDoris'],
@@ -103,17 +103,38 @@ def patient_table(short: bool = False):
             ['20200915_165803t1fl2dtraBauerHorst'],
             []
         ],
-        'samseg': [
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl']
+        'samseg': [ 
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl'
         ],
         'reconall': [
-            ['Possible'],
-            ['Possible'],
-            ['Possible'],
-            ['Possible']
+            'Possible',
+            'Possible',
+            'Possible',
+            'Possible'
+        ]
+    })
+    
+    if parts[1]: data.update({                         
+        'samseg': [ 
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl'
+        ],
+        'reconall': [
+            'Possible',
+            'Possible',
+            'Possible',
+            'Possible'
+        ],
+        'converted': [
+            [False, False, False], 
+            [False, False, False],
+            [False, False, False],
+            [False, False, False],
         ]
     })
         
