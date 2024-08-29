@@ -55,65 +55,86 @@ def settings():
         }
     }
     
-def patient_table(short: bool = False):
+def patient_table(parts: list[bool] = [False, False]):
     data = {
-        'acquisition': ['Angeli_Vassiliki', 'Baehr_Doris', 'Bauer_Horst', 'Beck_Renate'],
+        'acquisition': ['s1', 's2', 's3', 's4'],
         'mris': [
-            ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001', '20210623_185600t2spacesagp2isoAngeliVassilikis020a1001', '20210623_185600t1fl2dtraAngeliVassilikis007a1001'],
-            ['20200602_180510t1mpragesagp2isoBaehrDoris', '20200602_180510t2spacesagp2isoBaehrDoris', '20200602_180510t1fl2dtraBaehrDoris'],
-            ['20200915_165803t1mpragesagp2isoBauerHorst', '20200915_165803t2spacesagp2isoBauerHorst', '20200915_165803t1fl2dtraBauerHorst'],
-            ['20170831_152703t1setraBeckRenate', '20170831_152703t2tsetrap2320BeckRenate', '20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate'],
+            ['20210623_185600t1mpragesagp2iso016a1001', '20210623_185600t2spacesagp2iso020a1001', '20210623_185600t1fl2dtra007a1001'],
+            ['20200602_180510t1mpragesagp2iso', '20200602_180510t2spacesagp2iso', '20200602_180510t1fl2dtra'],
+            ['20200915_165803t1mpragesagp2iso', '20200915_165803t2spacesagp2iso', '20200915_165803t1fl2dtra'],
+            ['20170831_152703t1setra', '20170831_152703t2tsetrap2320', '20170831_152703t2spcirprepnssagdarkflp2iso'],
             ],
         'paths': [
-            ['../../test_data/NIFTI/Angeli_Vassiliki/20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001.nii', '../../test_data/NIFTI/Angeli_Vassiliki/20210623_185600t2spacesagp2isoAngeliVassilikis020a1001.nii', '../../test_data/NIFTI/Angeli_Vassiliki/20210623_185600t1fl2dtraAngeliVassilikis007a1001.nii'],
-            ['../../test_data/NIFTI/Baehr_Doris/20200602_180510t1mpragesagp2isoBaehrDoris.nii', '../../test_data/NIFTI/Baehr_Doris/20200602_180510t2spacesagp2isoBaehrDoris.nii', '../../test_data/NIFTI/Baehr_Doris/20200602_180510t1fl2dtraBaehrDoris.nii'],
-            ['../../test_data/NIFTI/Bauer_Horst/20200915_165803t1mpragesagp2isoBauerHorst.nii', '../../test_data/NIFTI/Bauer_Horst/20200915_165803t2spacesagp2isoBauerHorst.nii', '../../test_data/NIFTI/Bauer_Horst/20200915_165803t1fl2dtraBauerHorst.nii'],
-            ['../../test_data/NIFTI/Beck_Renate/20170831_152703t1setraBeckRenate.nii', '../../test_data/NIFTI/Beck_Renate/20170831_152703t2tsetrap2320BeckRenate.nii', '../../test_data/NIFTI/Beck_Renate/20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii'],
-        ],
-        'converted': [
-            [False, False, False],
-            [False, False, False],
-            [False, False, False],
-            [False, False, False],
+            ['../../test_data/NIFTI/s1/20210623_185600t1mpragesagp2iso016a1001.nii', '../../test_data/NIFTI//20210623_185600t2spacesagp2iso020a1001.nii', '../../test_data/NIFTI//20210623_185600t1fl2dtra007a1001.nii'],
+            ['../../test_data/NIFTI/s2/20200602_180510t1mpragesagp2iso.nii', '../../test_data/NIFTI/s2/20200602_180510t2spacesagp2iso.nii', '../../test_data/NIFTI/s2/20200602_180510t1fl2dtra.nii'],
+            ['../../test_data/NIFTI/s3/20200915_165803t1mpragesagp2iso.nii', '../../test_data/NIFTI/s3/20200915_165803t2spacesagp2iso.nii', '../../test_data/NIFTI/s3/20200915_165803t1fl2dtra.nii'],
+            ['../../test_data/NIFTI/s4/20170831_152703t1setra.nii', '../../test_data/NIFTI/s4/20170831_152703t2tsetrap2320.nii', '../../test_data/NIFTI/s4/20170831_152703t2spcirprepnssagdarkflp2iso.nii'],
         ]
     }
     
-    if not short: data.update({
+    if parts[0]: data.update({
+        'converted': [
+            [], # added in add processing info 
+            [],
+            [],
+            [],
+        ],
         't1': [
-            ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001', '20210623_185600t1fl2dtraAngeliVassilikis007a1001'],
-            ['20200602_180510t1mpragesagp2isoBaehrDoris', '20200602_180510t1fl2dtraBaehrDoris'],
-            ['20200915_165803t1mpragesagp2isoBauerHorst', '20200915_165803t1fl2dtraBauerHorst'],
-            ['20170831_152703t1setraBeckRenate']
+            ['20210623_185600t1mpragesagp2iso016a1001', '20210623_185600t1fl2dtra007a1001'],
+            ['20200602_180510t1mpragesagp2iso', '20200602_180510t1fl2dtra'],
+            ['20200915_165803t1mpragesagp2iso', '20200915_165803t1fl2dtra'],
+            ['20170831_152703t1setra']
         ],
         't2': [
-            ['20210623_185600t2spacesagp2isoAngeliVassilikis020a1001'],
-            ['20200602_180510t2spacesagp2isoBaehrDoris'],
-            ['20200915_165803t2spacesagp2isoBauerHorst'],
-            ['20170831_152703t2tsetrap2320BeckRenate']
+            ['20210623_185600t2spacesagp2iso020a1001'],
+            ['20200602_180510t2spacesagp2iso'],
+            ['20200915_165803t2spacesagp2iso'],
+            ['20170831_152703t2tsetrap2320']
         ],
         't2_flair': [
             [],
             [],
             [],
-            ['20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate']
+            ['20170831_152703t2spcirprepnssagdarkflp2iso']
         ],
         't1_flair': [
-            ['20210623_185600t1fl2dtraAngeliVassilikis007a1001'],
-            ['20200602_180510t1fl2dtraBaehrDoris'],
-            ['20200915_165803t1fl2dtraBauerHorst'],
+            ['20210623_185600t1fl2dtra007a1001'],
+            ['20200602_180510t1fl2dtra'],
+            ['20200915_165803t1fl2dtra'],
             []
         ],
-        'samseg': [
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl'],
-            ['Possible - only t2 not fl']
+        'samseg': [ 
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl'
         ],
         'reconall': [
-            ['Possible'],
-            ['Possible'],
-            ['Possible'],
-            ['Possible']
+            'Possible',
+            'Possible',
+            'Possible',
+            'Possible'
+        ]
+    })
+    
+    if parts[1]: data.update({                         
+        'samseg': [ 
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl',
+            'Possible - only t2 not fl'
+        ],
+        'reconall': [
+            'Possible',
+            'Possible',
+            'Possible',
+            'Possible'
+        ],
+        'converted': [
+            [False, False, False], 
+            [False, False, False],
+            [False, False, False],
+            [False, False, False],
         ]
     })
         
