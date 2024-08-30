@@ -1,5 +1,6 @@
 import pandas as pd
-import testing_utils
+import tests.testing_utils as testing_utils
+import fs_docker_manager.create_table as create_table
 
 import sys
 # Creating the DataFrame
@@ -10,104 +11,145 @@ sys.path.append("../")
 import fs_docker_manager.prepare as prepare
 # Assuming Table class is defined in a module named table_module
 # from table_module import Table
+# python -m unittest tests.prepare_tests
 
 class TestPrepare(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
         settings = testing_utils.settings()
-        table = testing_utils.patient_table()
-        cls.prepare_class = prepare.Prepare(table, settings)
+        
+        table = create_table.Table(settings, find_type="nifti", testing = True)
+        table.create_table_df(settings["nifti"], testing_utils.testing_paths())
+        table.create_subj_info()
+        table.add_processing_info("test", "test", "test")
+        cls.prepare_class = prepare.Prepare(settings, table)
 
     @classmethod
     def test_prepare_for_conversion(self):
         origins, _ = self.prepare_class.prepare_for_conversion(testing=True)
         message = "test_prepare_for_conversion for origin file not correct"
 
+                                # Write the contents of origins to a text file
+        with open('origins_test_prepare_for_conversion.txt', 'w') as f:
+            for origin in origins:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(origins, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_reconall(self):
         origins, _ = self.prepare_class.prepare_for_reconall(testing=True)
         message = "test_prepare_for_reconall for origin file not correct"
 
+                # Write the contents of origins to a text file
+        with open('origins_test_prepare_for_reconall.txt', 'w') as f:
+            for origin in origins:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(origins, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_samseg(self):
         origins, _ = self.prepare_class.prepare_for_samseg(testing=True)
         message = "test_prepare_for_samseg for origin file not correct"
 
+                # Write the contents of origins to a text file
+        with open('origins_test_prepare_for_samseg.txt', 'w') as f:
+            for origin in origins:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(origins, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_registration(self):
         origins, _ = self.prepare_class.prepare_for_registration(testing=True)
         message = "test_prepare_for_registration for origin file not correct"
 
-        expected_file = [""]
-        self.assertTrue(testing_utils.test_files(origins, expected_file), message)
-        pass
-
-    @classmethod
-    def test_prepare_for_tables(self):
-        origins, _ = self.prepare_class.prepare_for_tables(testing=True)
-        message = "test_prepare_for_tables for origin file not correct"
+                # Write the contents of origins to a text file
+        with open('origins_test_prepare_for_registration.txt', 'w') as f:
+            for origin in origins:
+                f.write(f"{origin}\n")
 
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(origins, expected_file), message)
-        pass
+        
     
     @classmethod
     def test_prepare_for_conversion(self):
         _, destinations = self.prepare_class.prepare_for_conversion(testing=True)
         message = "test_prepare_for_conversion for destinations file not correct"
 
+        # Write the contents of origins to a text file
+        with open('destinations_test_prepare_for_conversion.txt', 'w') as f:
+            for origin in destinations:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_reconall(self):
         _, destinations = self.prepare_class.prepare_for_reconall(testing=True)
         message = "test_prepare_for_reconall for destinations file not correct"
 
+        # Write the contents of origins to a text file
+        with open('destinations_test_prepare_for_reconall.txt', 'w') as f:
+            for origin in destinations:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_samseg(self):
         _, destinations = self.prepare_class.prepare_for_samseg(testing=True)
         message = "test_prepare_for_samseg for destinations file not correct"
 
+        # Write the contents of origins to a text file
+        with open('destinations_test_prepare_for_samseg.txt', 'w') as f:
+            for origin in destinations:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_registration(self):
         _, destinations = self.prepare_class.prepare_for_registration(testing=True)
         message = "test_prepare_for_registration for destinations file not correct"
 
+        # Write the contents of origins to a text file
+        with open('destinations_test_prepare_for_registration.txt', 'w') as f:
+            for origin in destinations:
+                f.write(f"{origin}\n")
+
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
-        pass
+        
 
     @classmethod
     def test_prepare_for_tables(self):
-        _, destinations = self.prepare_class.prepare_for_tables(testing=True)
+        destinations = self.prepare_class.prepare_for_tables(testing=True)
         message = "test_prepare_for_tables for destinations file not correct"
+
+        # Write the contents of origins to a text file
+        with open('destinations_test_prepare_for_tables.txt', 'w') as f:
+            for origin in destinations:
+                f.write(f"{origin}\n")
 
         expected_file = [""]
         self.assertTrue(testing_utils.test_files(destinations, expected_file), message)
-        pass
+        
 
 if __name__ == '__main__':
     unittest.main()

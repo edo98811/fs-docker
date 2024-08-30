@@ -66,7 +66,7 @@ This class is used to create the table, and contains it during the software exec
 """
 
 class Table():
-  def __init__(self, SET: dict, find_type: str, new: bool = False, testing:bool = False): 
+  def __init__(self, SET: dict, find_type: str, new: bool = False, testing: bool = False): 
     self.find_type = find_type
     self.SET = SET
     
@@ -100,7 +100,7 @@ class Table():
     self.create_subj_info()
     self.add_processing_info(os.path.join(self.SET["reconall"]), os.path.join(self.SET["samseg"]), os.path.join(self.SET["nifti"]))
 
-
+  # Methods to compile and save the table
   def create_table_df(self, base_directory: str, testing_paths: list[tuple[str]] = ["",]) -> None:
     print(testing_paths)
     # remove_spaces_in_folders(base_directory)

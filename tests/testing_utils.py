@@ -8,7 +8,25 @@ def test_files(file1, file2):
         if (file2[i] != file1[i]): return False
     
     return True
-
+def testing_paths():
+    return [
+            ("test_data/NIFTI", 
+             ['Angeli_Vassiliki', 'Baehr_Doris', 'Bauer_Horst', 'Beck_Renate'], 
+             []),
+            ("test_data/NIFTI/Angeli_Vassiliki", 
+             [], 
+             ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001.nii', '20210623_185600t2spacesagp2isoAngeliVassilikis020a1001.nii', '20210623_185600t1fl2dtraAngeliVassilikis007a1001.nii']),
+            ("test_data/NIFTI/Baehr_Doris", 
+             [], 
+             ['20200602_180510t1mpragesagp2isoBaehrDoris.nii', '20200602_180510t2spacesagp2isoBaehrDoris.nii', '20200602_180510t1fl2dtraBaehrDoris.nii']),
+            ("test_data/NIFTI/Bauer_Horst", 
+             [], 
+             ['20200915_165803t1mpragesagp2isoBauerHorst.nii', '20200915_165803t2spacesagp2isoBauerHorst.nii', '20200915_165803t1fl2dtraBauerHorst.nii']),
+            ("test_data/NIFTI/Beck_Renate", 
+             [], 
+             ['20170831_152703t1setraBeckRenate.nii', '20170831_152703t2tsetrap2320BeckRenate.nii', '20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii']),
+        ]
+    
 def settings():
     return {
         "nifti": Path(__file__).parent /"NIFTI",

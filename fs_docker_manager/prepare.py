@@ -277,7 +277,10 @@ class Prepare():
 
             subject = f"{row['acquisition']}"
             subjects.append(subject)
-
-    with open("tmp/subjects.txt", "w") as fp:
-      for item in subjects:
-        fp.write(f"{item}\n")
+        
+    if testing:
+      return subjects
+    else: 
+      with open("tmp/subjects.txt", "w") as fp:
+        for item in subjects:
+          fp.write(f"{item}\n")

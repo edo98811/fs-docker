@@ -2,7 +2,7 @@ todo.txt
 fs_docker_manager/__main__old.py
 test_data/
 *.xlsx
-
+*.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
