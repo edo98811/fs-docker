@@ -2,12 +2,14 @@ from pathlib import Path
 import pandas as pd
 
 def test_files(file1, file2): 
+    # print(f"{len(file1)} - {len(file2)}")
     if len(file1) != len(file2): return False
     
     for i in range(len(file1)): 
         if (file2[i] != file1[i]): return False
     
     return True
+
 def testing_paths():
     return [
             ("test_data/NIFTI", 
@@ -158,6 +160,11 @@ def patient_table(parts: list[bool] = [False, False]):
         
     return pd.DataFrame(data)
 
+def update_converted():
+    
+    table = patient_table([True, True])
+    return table["converted"].apply(lambda x: [True if not item else item for item in x])
+        
 def check_table(table, table_to_test):
     
     return True

@@ -28,7 +28,7 @@ class TestTable(unittest.TestCase):
         
 
     def test_init(self):
-        print(self.testing_paths)
+ 
         self.table.create_table_df(self.settings["nifti"], self.testing_paths)
         table = testing_utils.patient_table()
         
@@ -40,7 +40,7 @@ class TestTable(unittest.TestCase):
         self.table.create_subj_info()
         
         table = testing_utils.patient_table(parts = [True, False])
-        self.table.table.to_excel("test.xlsx")
+        # self.table.table.to_excel("test.xlsx")
 
         pd.testing.assert_frame_equal(self.table.table, table)
 
@@ -50,7 +50,7 @@ class TestTable(unittest.TestCase):
         self.table.add_processing_info("test", "test", "test")
         
         table = testing_utils.patient_table(parts = [True, True])
-        self.table.table.to_excel("test_test.xlsx")
+        # self.table.table.to_excel("test_test.xlsx")
         
         pd.testing.assert_frame_equal(self.table.table, table)
 

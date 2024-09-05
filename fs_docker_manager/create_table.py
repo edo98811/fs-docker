@@ -102,7 +102,7 @@ class Table():
 
   # Methods to compile and save the table
   def create_table_df(self, base_directory: str, testing_paths: list[tuple[str]] = ["",]) -> None:
-    print(testing_paths)
+    # print(testing_paths)
     # remove_spaces_in_folders(base_directory)
     data = {
       "acquisition": [],
@@ -121,7 +121,7 @@ class Table():
     if self.find_type == "dicom":
       # Iterate through all the directories in base_directory
       for root, dirs, _ in directories:
-          print(f"{root}{dirs}")
+          # print(f"{root}{dirs}")
           
           # Iterate through all images (or believed to be)
           for dicom_dir in dirs:
@@ -165,7 +165,7 @@ class Table():
 
       # Iterate through all the directories in base_directory
       for root, dirs, niis in directories:
-          print(f"{root}{dirs}{niis}")
+          # print(f"{root}{dirs}{niis}")
           # Iterate through all images (or believed to be)
           for nii_file in niis:
                 
@@ -357,7 +357,7 @@ class Table():
           # nifti_folder = os.path.join(search_path_data, f"{row['acquisition']}", f"{mri}.nii")
           # print(f"NIFTI: {nifti_folder} does not exist")
           self.table.at[index, "converted"].append(False)
-    print(self.table.loc[:, "converted"])
+    # print(self.table.loc[:, "converted"])
     
     return(self.table)
 

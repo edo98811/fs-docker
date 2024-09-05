@@ -189,15 +189,18 @@ class Prepare():
 
       if row["reconall"] == "Possible":
 
-        # Select the t1 as described below
+        # if the element in converted that has the same position as the mri I am checking in the mris vector is true
+        t1 = None
         for mri in row["t1"]:
-          if row["converted"][row["mris"].index(mri)]: # if the element in converted that has the same position as the mri I am checking in the mris vector is true
-            t1 = mri
-
+          if row["converted"][row["mris"].index(mri)]: t1 = mri
+            
+        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
+        
         if f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii" != f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii".replace(" ", ""):
           print (f"non valid name for freesurfer: /ext/fs-subjects/{row['acquisition']}/{t1}.nii")
           continue
         
+
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
@@ -214,12 +217,14 @@ class Prepare():
     for _, row in self.df.iterrows():
 
       if row["samseg"] == "Prepared":
-
+        
+        t1 = None
         # Select the t1 
         for mri in row["t1"]:
-          if row["converted"][row["mris"].index(mri)]: # if the element in converted that has the same position as the mri I am checking in the mris vector is true
-            t1 = mri
-        
+          if row["converted"][row["mris"].index(mri)]: t1 = mri
+            
+        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
+
         # Add the paths to the origins and destination file
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/flair_t2_reg.nii")
@@ -239,10 +244,10 @@ class Prepare():
 
       if row["samseg"] == "Possible" or row["samseg"] == "Possible - only t2 not fl":
         
+        t1 = None
         # Select the t1 as described below
         for mri in row["t1"]:
-          if row["converted"][row["mris"].index(mri)]: # if the element in converted that has the same position as the mri I am checking in the mris vector is true
-            t1 = mri
+          if row["converted"][row["mris"].index(mri)]: t1 = mri
 
         if len(row["t2_flair"]) > 0:
           source = row["t2_flair"]
@@ -250,6 +255,8 @@ class Prepare():
           source = row["t1_flair"]
         else:
           source = row["t2"]
+          
+        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
         
         # Selects the mri that has already been converted in the source list. by checking which is marked as true in th converted vecteor
         for mri in source:
