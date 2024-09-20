@@ -21,22 +21,22 @@ The folder where this is run needs to hafve a regular structure, acquisition fol
  - **`fs_docker init_config`** Requires one argument, path to the new config file that needs to be created, it needs to be a .json file
 Arguments: string, path to config file, including the name of the file, the name needs to be ajson file. example: "/mnt/S/edoardoStorage/config.json"
 
-- **`fs_docker tool fstables`** create the tables using the freesurfer command 
-
-- **`fs_docker tool register`**  Register the t2 to the t1 to run the samseg
-
-- **`fs_docker tool preparenifti`**  move the nifti files to another folder if the nifti folder is different from dicom folder in settings
-
-- **`fs_docker tool convertdicom`**  convert the dicom files to nifti
-
-- **`fs_docker tool samseg`** run samseg, after performing the registration 
-
 - **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use -start_type nifti
 This creates a table that contains all the info on the subjects ordered in these columns: 
 ID, mris, paths. 
 
+- **`fs_docker tool fstables`** create the tables using the freesurfer command 
 
-- **`fs_docker tool fstables`** 
+- **`fs_docker tool register`**  Register the t2 to the t1 to run the samseg
+
+- **`fs_docker tool preparenifti`**  move the nifti files to another folder if the nifti folder is different from rawdata folder in settings, otherwise converts the dicom folder to nifti if needed
+
+- **`fs_docker tool convertdicom`**  convert the dicom files to nifti
+
+- **`fs_docker tool samseg`** run samseg, to be run after performing the registration 
+
+
+
 
 #### Workflow example: 
 install package 
@@ -70,6 +70,7 @@ This file is used for set up the program for the current dataset
 #### Paths
 
 - **nifti**: The path to the directory containing NIfTI files.
+- **rawdata**: The path to the directory containing rawdata files, can also be the same as nifti.
 - **base_path**: The base directory path for various tools and outputs.
 - **dicom**: The path to the directory containing DICOM files.
 - **reconall**: The path to the directory for recon-all results.

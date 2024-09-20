@@ -30,7 +30,7 @@ def table(ctx: click.Context, test_mode, start_type: str):
 
 
 @tool.command()
-@click.option('--nsub', nargs=2, type=float, default = (120, 20))
+@click.option('--nsub', nargs=2, type=int, default = (120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
 def convertdicom(ctx: click.Context, test_mode, nsub: tuple):
@@ -57,7 +57,7 @@ def preparenifti(ctx: click.Context, test_mode):
 
 
 @tool.command()
-@click.option('--nsub', nargs=2, type=float, default=(120, 20))
+@click.option('--nsub', nargs=2, type=int, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
 def run_recon_all(ctx: click.Context, test_mode, nsub: tuple):
@@ -70,7 +70,7 @@ def run_recon_all(ctx: click.Context, test_mode, nsub: tuple):
 
 
 @tool.command()
-@click.option('--nsub', nargs=2, type=float, default=(120, 20))
+@click.option('--nsub', nargs=2, type=int, default=(120, 20))
 @click.option('--test_mode', type=bool, default = False)
 @click.pass_context
 def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
@@ -84,12 +84,14 @@ def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
 
 @tool.command()
 @click.option('--test_mode', type=bool, default = False)
+@click.option('--nsub', nargs=2, type=int, default=(120, 20))
 @click.pass_context
-def registration(ctx: click.Context, test_mode):
+def registration(ctx: click.Context, test_mode, nsub):
+    N1, N2 = nsub
     """Run registration."""
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="nifti")
     fs.Prepare.prepare_for_registration()
-    
+    fs.Docker.run("register", N1, N2)
     
 @base.command()
 @click.argument('destination', type=click.Path())

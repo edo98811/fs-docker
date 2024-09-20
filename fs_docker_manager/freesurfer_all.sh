@@ -123,8 +123,8 @@ samseg() {
 
 register(){
   read_line=0
-  registration_name="flair_t2_ToT1.lta"
-  registered_flair_name="flair_t2_reg.nii"
+  registration_name="flair_ToT1.lta"
+  registered_flair_name="flair_reg.nii"
   for folder in "${destinations[@]}"; do
     count=$((count + 1)) 
 

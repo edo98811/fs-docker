@@ -20,7 +20,7 @@ class DockerInstance():
                 "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
                 "-v", f"{self.SET["license_path"]}:/license.txt:ro",
                 "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
-                "-v", f"{Path(__file__).parent}/tmp:/info:ro",
+                "-v", f"{Path(__file__).parent.parent}/tmp:/info:ro",
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
@@ -65,12 +65,12 @@ class DockerInstance():
 
             with open(log_file, "a") as log:
                 log.write(f"    edoardo_freesurfer_{max_number}\n")
-
+            ## print(os.path.exists(f"{Path(__file__).parent.parent}/tmp"))
             command = [ # " ".join(
                 "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
                 "-v", f"{self.SET["license_path"]}:/license.txt:ro",
                 "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
-                "-v", f"{Path(__file__).parent}/tmp:/info:ro",
+                "-v", f"{Path(__file__).parent.parent}/tmp/:/info:ro",
                 "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
                 "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
                 "-e", "FS_LICENSE=license.txt",
@@ -123,7 +123,7 @@ class DockerInstance():
             "docker", "run", "--rm", "--name", f"edoardo_freesurfer_{max_number}",
             "-v", f"{self.SET["license_path"]}:/license.txt:ro",
             "-v", f"{Path(__file__).parent}/freesurfer_all.sh:/root/freesurfer.sh",
-            "-v", f"{Path(__file__).parent}/tmp:/info:ro",
+            "-v", f"{Path(__file__).parent.parent}/tmp:/info:ro",
             "-v", f"{self.SET[self.destination]}:/ext/processed-subjects",
             "-v", f"{self.SET[self.source]}:/ext/fs-subjects",
             "-e", "FS_LICENSE=license.txt",

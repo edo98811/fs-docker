@@ -110,13 +110,13 @@ class Prepare():
                   if os.path.exists(os.path.join(self.SET["rawdata"], last_path)):
                     os.makedirs(os.path.join(self.SET["nifti"], row['acquisition']), exist_ok=True)
                     shutil.copy(os.path.join(self.SET["rawdata"], last_path), 
-                                    os.path.join(self.SET["nifti"], row['acquisition'], f"{last_element}.nii"))
+                                    os.path.join(self.SET["nifti"], row['acquisition'], f"{last_element}.nii.gz"))
                   else: 
                     raise Exception("trying to prepare nifti but dicom found, maybe you wanted to use 'convertdicom'")
                 else:
                   if not os.path.isfile(os.path.join(self.SET["rawdata"], last_path)):
                     source_docker_origin_path.append(f"/ext/fs-subjects/{last_path}")
-                    source_docker_destination_path.append(f"/ext/processed-subjects/{row['acquisition']}/{last_element}.nii")
+                    source_docker_destination_path.append(f"/ext/processed-subjects/{row['acquisition']}/{last_element}.nii.gz")
                   else:
                     raise Exception("trying to convert dicom but file found, maybe you wanted to use 'preparnifti'")
       f.write("\n")
@@ -173,7 +173,7 @@ class Prepare():
 
                 if (not c):
                   source_docker_origin_path.append(f"/ext/fs-subjects/{last_path}")
-                  source_docker_destination_path.append(f"/ext/processed-subjects/{row['acquisition']}/{last_element}.nii")
+                  source_docker_destination_path.append(f"/ext/processed-subjects/{row['acquisition']}/{last_element}.nii.gz")
 
     if testing:
       return source_docker_origin_path, source_docker_destination_path
@@ -196,12 +196,12 @@ class Prepare():
             
         if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
         
-        if f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii" != f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii".replace(" ", ""):
-          print (f"non valid name for freesurfer: /ext/fs-subjects/{row['acquisition']}/{t1}.nii")
+        if f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz" != f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz".replace(" ", ""):
+          print (f"non valid name for freesurfer: /ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
           continue
         
 
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
     if testing:
@@ -226,8 +226,8 @@ class Prepare():
         if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
 
         # Add the paths to the origins and destination file
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/flair_t2_reg.nii")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/flair_reg.nii")
         source_docker_destination_path.append(f"{row['acquisition']}") # /ext/processed-subjects/
     
     if testing:
@@ -241,8 +241,9 @@ class Prepare():
     source_docker_destination_path = []
 
     for _, row in self.df.iterrows():
-
-      if row["samseg"] == "Possible" or row["samseg"] == "Possible - only t2 not fl":
+      
+      # prepared is automatically excluded
+      if row["samseg"] == "Possible" or row["samseg"] == "Possible - only t2 not fl" or row["samseg"] == "Possible - only t1fl not t2fl":
         
         t1 = None
         # Select the t1 as described below
@@ -265,8 +266,8 @@ class Prepare():
 
         # old: t2 = eval(row["t2_flair"])[-1] if len(eval(row["t2_flair"])) > 0 else eval(row["t2"])[-1]
 
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii")
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t2}.nii")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t2}.nii.gz")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
     if testing:

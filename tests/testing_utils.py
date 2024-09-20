@@ -17,16 +17,16 @@ def testing_paths():
              []),
             ("test_data/NIFTI/Angeli_Vassiliki", 
              [], 
-             ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001.nii', '20210623_185600t2spacesagp2isoAngeliVassilikis020a1001.nii', '20210623_185600t1fl2dtraAngeliVassilikis007a1001.nii']),
+             ['20210623_185600t1mpragesagp2isoAngeliVassilikis016a1001.nii.gz', '20210623_185600t2spacesagp2isoAngeliVassilikis020a1001.nii.gz', '20210623_185600t1fl2dtraAngeliVassilikis007a1001.nii.gz']),
             ("test_data/NIFTI/Baehr_Doris", 
              [], 
-             ['20200602_180510t1mpragesagp2isoBaehrDoris.nii', '20200602_180510t2spacesagp2isoBaehrDoris.nii', '20200602_180510t1fl2dtraBaehrDoris.nii']),
+             ['20200602_180510t1mpragesagp2isoBaehrDoris.nii.gz', '20200602_180510t2spacesagp2isoBaehrDoris.nii.gz', '20200602_180510t1fl2dtraBaehrDoris.nii.gz']),
             ("test_data/NIFTI/Bauer_Horst", 
              [], 
-             ['20200915_165803t1mpragesagp2isoBauerHorst.nii', '20200915_165803t2spacesagp2isoBauerHorst.nii', '20200915_165803t1fl2dtraBauerHorst.nii']),
+             ['20200915_165803t1mpragesagp2isoBauerHorst.nii.gz', '20200915_165803t2spacesagp2isoBauerHorst.nii.gz', '20200915_165803t1fl2dtraBauerHorst.nii.gz']),
             ("test_data/NIFTI/Beck_Renate", 
              [], 
-             ['20170831_152703t1setraBeckRenate.nii', '20170831_152703t2tsetrap2320BeckRenate.nii', '20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii']),
+             ['20170831_152703t1setraBeckRenate.nii.gz', '20170831_152703t2tsetrap2320BeckRenate.nii.gz', '20170831_152703t2spcirprepnssagdarkflp2isoBeckRenate.nii.gz']),
         ]
     
 def settings():
@@ -85,10 +85,10 @@ def patient_table(parts: list[bool] = [False, False]):
             ['20170831_152703t1setra', '20170831_152703t2tsetrap2320', '20170831_152703t2spcirprepnssagdarkflp2iso'],
             ],
         'paths': [
-            ['../../test_data/NIFTI/s1/20210623_185600t1mpragesagp2iso016a1001.nii', '../../test_data/NIFTI//20210623_185600t2spacesagp2iso020a1001.nii', '../../test_data/NIFTI//20210623_185600t1fl2dtra007a1001.nii'],
-            ['../../test_data/NIFTI/s2/20200602_180510t1mpragesagp2iso.nii', '../../test_data/NIFTI/s2/20200602_180510t2spacesagp2iso.nii', '../../test_data/NIFTI/s2/20200602_180510t1fl2dtra.nii'],
-            ['../../test_data/NIFTI/s3/20200915_165803t1mpragesagp2iso.nii', '../../test_data/NIFTI/s3/20200915_165803t2spacesagp2iso.nii', '../../test_data/NIFTI/s3/20200915_165803t1fl2dtra.nii'],
-            ['../../test_data/NIFTI/s4/20170831_152703t1setra.nii', '../../test_data/NIFTI/s4/20170831_152703t2tsetrap2320.nii', '../../test_data/NIFTI/s4/20170831_152703t2spcirprepnssagdarkflp2iso.nii'],
+            ['../../test_data/NIFTI/s1/20210623_185600t1mpragesagp2iso016a1001.nii.gz', '../../test_data/NIFTI//20210623_185600t2spacesagp2iso020a1001.nii.gz', '../../test_data/NIFTI//20210623_185600t1fl2dtra007a1001.nii.gz'],
+            ['../../test_data/NIFTI/s2/20200602_180510t1mpragesagp2iso.nii.gz', '../../test_data/NIFTI/s2/20200602_180510t2spacesagp2iso.nii.gz', '../../test_data/NIFTI/s2/20200602_180510t1fl2dtra.nii.gz'],
+            ['../../test_data/NIFTI/s3/20200915_165803t1mpragesagp2iso.nii.gz', '../../test_data/NIFTI/s3/20200915_165803t2spacesagp2iso.nii.gz', '../../test_data/NIFTI/s3/20200915_165803t1fl2dtra.nii.gz'],
+            ['../../test_data/NIFTI/s4/20170831_152703t1setra.nii.gz', '../../test_data/NIFTI/s4/20170831_152703t2tsetrap2320.nii.gz', '../../test_data/NIFTI/s4/20170831_152703t2spcirprepnssagdarkflp2iso.nii.gz'],
         ]
     }
     
