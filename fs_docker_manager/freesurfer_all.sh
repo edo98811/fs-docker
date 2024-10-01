@@ -121,6 +121,45 @@ samseg() {
   done
 }
 
+samseg_t1() {
+  read_line=0
+  for folder in "${destinations[@]}"; do
+    count=$((count + 1)) 
+
+    t1="${origins[read_line]}"
+    read_line=$((read_line + 1)) 
+    
+    if [ $count -ge $start ]; then
+    
+      echo " "
+      echo "subject: $count - $folder"
+      
+      if [ -f "%SUBJECTS_DIR/$folder" ]; then
+        echo "Skipping $folder - Already processed"
+        continue  # Skip to the next iteration
+      fi
+            
+      echo "running samseg: $SUBJECTS_DIR/$folder..."
+      echo "run_samseg --input $t1 "
+      echo "--output $SUBJECTS_DIR/$folder --threads 8"
+
+      if [ $test -eq 0 ]; then
+        run_samseg --input "$t1"  --output "$SUBJECTS_DIR/$folder" --threads 8
+      else  
+        echo "run_samseg --input "$t1"  --output "$SUBJECTS_DIR/$folder" --lesion --threads 8" > $SUBJECTS_DIR/$folder.txt
+      fi
+
+      echo "done"
+      
+    fi
+    
+    if [ $count -ge $end ]; then
+        echo "stopped at iteration $count"
+        break
+    fi
+  done
+}
+
 register(){
   read_line=0
   registration_name="flair_ToT1.lta"

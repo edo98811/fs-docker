@@ -80,6 +80,18 @@ def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="samseg")
     fs.Prepare.prepare_for_samseg()
     fs.Docker.run("samseg", N1, N2)
+    
+@tool.command()
+@click.option('--nsub', nargs=2, type=int, default=(120, 20))
+@click.option('--test_mode', type=bool, default = False)
+@click.pass_context
+def run_samseg_onlyt1(ctx: click.Context, test_mode, nsub: tuple):
+    N1, N2 = nsub
+    """Run SAMSEG."""
+    
+    fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="samseg")
+    # fs.Prepare.prepare_for_samseg_only_t1()
+    fs.Docker.run("samseg_t1", N1, N2)
 
 
 @tool.command()

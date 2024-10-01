@@ -3,6 +3,10 @@ fs_docker_manager/__main__old.py
 test_data/
 *.xlsx
 *.txt
+
+test_data.py
+fs_docker_manager/settings_class.py
+fs_docker_manager/prepare_new.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

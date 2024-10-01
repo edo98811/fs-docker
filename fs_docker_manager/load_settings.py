@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 import click
 import shutil
+from collections import defaultdict
 
 DEFAULT_CONFIG_FILE = Path(__file__).parent / 'settings.json'
 LOCATION_FILE = Path(__file__).parent / 'location.json'
@@ -16,7 +17,9 @@ def load_config():
     try:
         if config_path and Path(config_path).exists():
             with open(config_path, 'r') as f:
-                return json.load(f)
+                settings_dict = defaultdict(lambda: [], json.load(f)) # default dict that returns an empty list when the key does not exist
+                settings_dict["file_identifiers"] = defaultdict(lambda: [], settings_dict["file_identifiers"])
+                return settings_dict
         else:
             raise FileNotFoundError(f'Configuration file {config_path} not found.')
     except FileNotFoundError as e:

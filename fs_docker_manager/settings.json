@@ -10,35 +10,35 @@
     "container_id": "1b0f81a8cb9f",
     "app_path": "/mnt/S/edoardoStorage/Freesurfer_tool/",
     "file_identifiers": {
-        "T1": [
+        "t1": [
             "t1"
         ],
-        "T1_pref_not": [
+        "t1_pref_not": [
             "KM"
         ],
-        "T2": [
+        "t2": [
             "t2"
         ],
-        "t1FLAIR": [
+        "t1_flair": [
             "t2fl",
             "fl"
         ],
-        "t2FLAIR": [
+        "t2_flair": [
             "t1fl",
             "fl"
         ],
-        "T1_no": [
-            "T2",
+        "t1_no": [
+            "t2",
             "t2",
             "FLAIR"
         ],
-        "T2_no": [
+        "t2_no": [
             "fl"
         ],
-        "t1FLAIR_no": [
+        "t1_flair_no": [
             "t2"
         ],
-        "t2FLAIR_no": [
+        "t2_flair_no": [
             "t1"
         ]
     }

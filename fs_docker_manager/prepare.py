@@ -128,7 +128,6 @@ class Prepare():
       _save_files(source_docker_origin_path, source_docker_destination_path) 
 
     
-
   def prepare_for_reconall_from_source_deprecated(self, cols=["t1"], last=True, testing = False)-> None: 
     
     source_docker_origin_path = []
@@ -194,7 +193,7 @@ class Prepare():
         for mri in row["t1"]:
           if row["converted"][row["mris"].index(mri)]: t1 = mri
             
-        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
+        if not t1: print(f"for subject {row['acquisition']} t1 not available"); continue
         
         if f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz" != f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz".replace(" ", ""):
           print (f"non valid name for freesurfer: /ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
@@ -223,7 +222,7 @@ class Prepare():
         for mri in row["t1"]:
           if row["converted"][row["mris"].index(mri)]: t1 = mri
             
-        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
+        if not t1: print(f"for subject {row['acquisition']} t1 not available"); continue
 
         # Add the paths to the origins and destination file
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
@@ -234,6 +233,32 @@ class Prepare():
       return source_docker_origin_path, source_docker_destination_path
     else: 
       _save_files(source_docker_origin_path, source_docker_destination_path)
+
+  def prepare_for_samseg_only_t1(self, testing = False)-> None:
+    
+    source_docker_origin_path = []
+    source_docker_destination_path = []
+
+    for _, row in self.df.iterrows():
+
+      if row["reconall"] == "Possible" and row["samseg"] != "Done":
+        
+        t1 = None
+        # Select the t1 
+        for mri in row["t1"]:
+          if row["converted"][row["mris"].index(mri)]: t1 = mri
+            
+        if not t1: print(f"for subject {row['acquisition']} t1 not available"); continue
+
+        # Add the paths to the origins and destination file
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
+        source_docker_destination_path.append(f"{row['acquisition']}") # /ext/processed-subjects/
+    
+    if testing:
+      return source_docker_origin_path, source_docker_destination_path
+    else: 
+      _save_files(source_docker_origin_path, source_docker_destination_path)
+
 
   def prepare_for_registration(self, testing = False)-> None:
     
@@ -257,17 +282,18 @@ class Prepare():
         else:
           source = row["t2"]
           
-        if not t1: print(f"for patient {row['acquisition']} t1 not available"); continue
+        if not t1: print(f"for subject {row['acquisition']} t1 not available"); continue # In theory not necessary
         
         # Selects the mri that has already been converted in the source list. by checking which is marked as true in th converted vecteor
         for mri in source:
           if row["converted"][row["mris"].index(mri)]: # if the element in converted that has the same position as the mri I am checking in the mris vector is true
-            t2 = mri
-
+            flair = mri
+            
+        if not flair: print(f"for subject {row['acquisition']} flair not available"); continue
         # old: t2 = eval(row["t2_flair"])[-1] if len(eval(row["t2_flair"])) > 0 else eval(row["t2"])[-1]
 
         source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t1}.nii.gz")
-        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{t2}.nii.gz")
+        source_docker_origin_path.append(f"/ext/fs-subjects/{row['acquisition']}/{flair}.nii.gz")
         source_docker_destination_path.append(f"{row['acquisition']}")
     
     if testing:
