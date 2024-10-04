@@ -11,6 +11,7 @@ tmp/
 test_data.py
 fs_docker_manager/settings_class.py
 fs_docker_manager/prepare_new.py
+fs_docker_manager/create_table_old.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
