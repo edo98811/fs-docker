@@ -212,6 +212,7 @@ class Table():
         else: return None, None, None
         
         rel_path = os.path.relpath(os.path.join(root, image), base_directory)
+        image = image + ".nii"
             
         return (acquisition, rel_path, image)
         
@@ -222,7 +223,7 @@ class Table():
         else: return None, None, None
             
         rel_path = os.path.relpath(os.path.join(root, image), base_directory)
-        image = image[:-7] if image.endswith(".nii.gz") else image[:-4]
+        # image = image[:-7] if image.endswith(".nii.gz") else image[:-4]
             
         return (acquisition, rel_path, image)
     
