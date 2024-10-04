@@ -9,8 +9,11 @@ LOCATION_FILE = Path(__file__).parent / 'location.json'
 
 def load_config():
     
-    with open(LOCATION_FILE, 'r') as file:
-        config_path = json.load(file)['location']
+    try:
+        with open(LOCATION_FILE, 'r') as file:
+            config_path = json.load(file)['location']
+    except FileNotFoundError:
+        raise FileNotFoundError(f"The location was never save, run init-config before using the package.")
         
     print(f'laoding config from: {config_path}')
     

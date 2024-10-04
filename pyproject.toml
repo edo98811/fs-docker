@@ -6,7 +6,6 @@ authors = ["edo98811 <edoardofilippi1998@gmail.com>"]
 readme = "README.md"
 include = [
     {path = "fs_docker_manager/settings.json"},
-    {path = "fs_docker_manager/location.json"},
     {path = "fs_docker_manager/freesurfer_all.sh"}
 ]
 exclude = ["fs_docker_manager.tests*"] 
