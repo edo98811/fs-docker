@@ -20,9 +20,8 @@ def tool(ctx: click.Context):
     
 @tool.command()
 @click.option('--start_type', type=str, default = "dicom")
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def table(ctx: click.Context, test_mode, start_type: str):
+def table(ctx: click.Context , start_type: str):
     """Create a table."""
     
     fs = FreesurferTool(ctx.obj["config"], start_type=start_type, new = True)
@@ -31,11 +30,11 @@ def table(ctx: click.Context, test_mode, start_type: str):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=int, default = (120, 20))
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def convertdicom(ctx: click.Context, test_mode, nsub: tuple):
-    N1, N2 = nsub
+def convertdicom(ctx: click.Context , nsub: tuple):
     """Convert DICOM files."""
+    N1, N2 = nsub
+    
 
     fs = FreesurferTool(ctx.obj["config"], origin_folder="rawdata", destination_folder="nifti")
     fs.Prepare.prepare_for_conversion()
@@ -43,12 +42,9 @@ def convertdicom(ctx: click.Context, test_mode, nsub: tuple):
 
 
 @tool.command()
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def preparenifti(ctx: click.Context, test_mode):
-    """
-    Prepare nifti files. if the rawdata are already nifti
-    If the rawdata directory coincides with the nifti data, the image names and paths are saved. Otherwise they are moved to the nifti directory
+def preparenifti(ctx: click.Context):
+    """ Prepare nifti files. if the rawdata are already nifti. If the rawdata directory coincides with the nifti data, the image names and paths are saved. Otherwise they are moved to the nifti directory.
     """
     move = False if ctx.obj["config"]["rawdata"] == ctx.obj["config"]["nifti"] else True
     
@@ -58,11 +54,11 @@ def preparenifti(ctx: click.Context, test_mode):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=int, default=(120, 20))
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def run_recon_all(ctx: click.Context, test_mode, nsub: tuple):
-    N1, N2 = nsub
+def run_recon_all(ctx: click.Context , nsub: tuple):
     """Run recon-all."""
+    N1, N2 = nsub
+
     
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="reconall")
     fs.Prepare.prepare_for_reconall()
@@ -71,11 +67,11 @@ def run_recon_all(ctx: click.Context, test_mode, nsub: tuple):
 
 @tool.command()
 @click.option('--nsub', nargs=2, type=int, default=(120, 20))
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
+def run_samseg(ctx: click.Context , nsub: tuple):
+    """Run samseg after registration."""
     N1, N2 = nsub
-    """Run SAMSEG."""
+
     
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="samseg")
     fs.Prepare.prepare_for_samseg()
@@ -83,32 +79,41 @@ def run_samseg(ctx: click.Context, test_mode, nsub: tuple):
     
 @tool.command()
 @click.option('--nsub', nargs=2, type=int, default=(120, 20))
-@click.option('--test_mode', type=bool, default = False)
 @click.pass_context
-def run_samseg_onlyt1(ctx: click.Context, test_mode, nsub: tuple):
-    N1, N2 = nsub
-    """Run SAMSEG."""
+def run_samseg_onlyt1(ctx: click.Context , nsub: tuple):
+    """Run samseg without a second image."""
     
+    N1, N2 = nsub
+
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="samseg")
     # fs.Prepare.prepare_for_samseg_only_t1()
     fs.Docker.run("samseg_t1", N1, N2)
 
 
 @tool.command()
-@click.option('--test_mode', type=bool, default = False)
 @click.option('--nsub', nargs=2, type=int, default=(120, 20))
 @click.pass_context
-def registration(ctx: click.Context, test_mode, nsub):
+def registration(ctx: click.Context , nsub):
+    """Run registration for samseg."""
     N1, N2 = nsub
-    """Run registration."""
+
     fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="nifti")
     fs.Prepare.prepare_for_registration()
     fs.Docker.run("register", N1, N2)
     
+@tool.command()
+@click.pass_context
+def fstables(ctx: click.Context):
+    """Using aparc2table and aseg2table on reconall results."""
+
+    fs = FreesurferTool(ctx.obj["config"], origin_folder="nifti", destination_folder="reconall")
+    fs.Prepare.prepare_for_tables()
+    fs.Docker.run("register", 1, 1)
+    
 @base.command()
 @click.argument('destination', type=click.Path())
 def init_config(destination):    
-    """Initialize  test_mode,a new configuration file in the provided path."""
+    """Initialize a new configuration file in the provided path."""
     load_settings.create_config(destination)
     
     

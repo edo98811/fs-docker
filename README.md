@@ -21,11 +21,11 @@ The folder where this is run needs to hafve a regular structure, acquisition fol
  - **`fs_docker init_config`** Requires one argument, path to the new config file that needs to be created, it needs to be a .json file
 Arguments: string, path to config file, including the name of the file, the name needs to be ajson file. example: "/mnt/S/edoardoStorage/config.json"
 
-- **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use -start_type nifti
+- **`fs_docker tool table`**  To run first you need to run create table, it can be either done starting from nifti or from dicom, default is starting from dicom, when you want to start from nifti you need to use -start_type nifti.
 This creates a table that contains all the info on the subjects ordered in these columns: 
-ID, mris, paths. 
+ID, mris, paths. Then according to the substrings given classifies the scans in categories-
 
-- **`fs_docker tool fstables`** create the tables using the freesurfer command 
+- **`fs_docker tool fstables`** create the tables using the freesurfer command to get a summmary of all the processed images
 
 - **`fs_docker tool register`**  Register the t2 to the t1 to run the samseg
 
@@ -47,10 +47,15 @@ fs_docker init_config
 set in settings the parameters and the substrings to to check for matching
 
 ```
+fs_docker tool table 
 fs_docker tool convertdicom
-create the table
-fs_docker tool preparenifti
 ```
+or 
+```
+fs_docker tool table --start_type nifti
+```
+
+
 Then
 ```
 fs_docker tool reconall 

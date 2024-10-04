@@ -16,6 +16,7 @@ test=0
 
 create_tables() {
 
+  # subjects path is where the file with all the subjects names is, is created in prepare
   cd $SUBJECTS_DIR
   asegstats2table --subjectsfile $subjects_path --meas volume --tablefile aseg_volumes.txt --skip
 
