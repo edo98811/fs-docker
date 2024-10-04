@@ -3,6 +3,10 @@ fs_docker_manager/__main__old.py
 test_data/
 *.xlsx
 *.txt
+oswalk.py
+test.json
+tmp/
+
 
 test_data.py
 fs_docker_manager/settings_class.py
