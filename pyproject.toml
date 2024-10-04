@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "fs-docker-manager"
 version = "0.1.0"
-description = ""
+description = "Package to simplify processing of large datasets with freesurfer and docker"
 authors = ["edo98811 <edoardofilippi1998@gmail.com>"]
 readme = "README.md"
 include = [
-    {path = "files/settings.json"},
-    {path = "files/location.json"},
+    {path = "fs_docker_manager/settings.json"},
+    {path = "fs_docker_manager/location.json"},
     {path = "fs_docker_manager/freesurfer_all.sh"}
 ]
 exclude = ["fs_docker_manager.tests*"] 
